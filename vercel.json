@@ -5,7 +5,8 @@
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist/familylist"
+        "distDir": "dist/familylist",
+        "buildCommand": "ng build --configuration production"
       }
     }
   ],
