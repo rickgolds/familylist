@@ -4,11 +4,13 @@ import {Observable, BehaviorSubject} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {jwtDecode} from 'jwt-decode';
 
+import {environment} from '../environments/environment';
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = environment.apiUrl;
 
   private userSubject = new BehaviorSubject<any>(null);
   user$ = this.userSubject.asObservable();
