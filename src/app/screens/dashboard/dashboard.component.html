@@ -1,0 +1,100 @@
+<app-header [showGoBack]="false" [user]="true" [showCard]="true" />
+
+<app-loader *ngIf="loading" />
+
+<main [className]="'scrollable main'" *ngIf="!loading">
+  <section [className]="'cards'">
+    <swiper-container slides-per-view="auto" class="swiper" space-between="16">
+      <swiper-slide *ngFor="let card of cards" class="swiper-slide">
+        <img
+          alt="card"
+          [src]="card.card"
+          [className]="'cards__item-card clickable'"
+          [routerLink]="card.route"
+        />
+      </swiper-slide>
+    </swiper-container>
+  </section>
+
+  <section [className]="'container operations'">
+    <ul [className]="'operations__list'">
+      <li
+        [className]="'operations__item clickable'"
+        *ngFor="let item of operations"
+        [routerLink]="item.route"
+      >
+        <img
+          alt="operation"
+          [src]="item.icon"
+          [className]="'operations__item-icon'"
+        />
+        <div [className]="'operations__item-info'">
+          <span [className]="'operations__item-title number-of-lines-1'">{{
+            item.line1
+          }}</span>
+          <span [className]="'operations__item-title number-of-lines-1'">{{
+            item.line2
+          }}</span>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section [className]="'users'">
+    <h5 [className]="'users__title'">Quick money transfer to:</h5>
+    <swiper-container slides-per-view="auto" class="swiper" space-between="10">
+      <swiper-slide *ngFor="let user of users" class="swiper-slide">
+        <div
+          [routerLink]="'/fund-transfer'"
+          [className]="'users__item clickable'"
+        >
+          <img
+            alt="user"
+            [src]="user.photo"
+            [className]="'users__item-photo'"
+          />
+          <span [className]="'users__item-name t12 number-of-lines-1'">{{
+            user.name
+          }}</span>
+        </div>
+      </swiper-slide>
+    </swiper-container>
+  </section>
+
+  <section [className]="'container transactions'">
+    <div [className]="'transactions__header'">
+      <h5 [className]="'transactions__title'">Latest transactions</h5>
+      <button>
+        <img
+          [className]="'transactions__search-icon'"
+          alt="search-icon"
+          src="/assets/svg/search.svg"
+        />
+      </button>
+    </div>
+    <ul [className]="'transactions__list'">
+      <li *ngFor="let item of transactions" [className]="'transactions__item'">
+        <img
+          alt="transaction"
+          [src]="item.icon"
+          [className]="'transactions__item-icon'"
+        />
+        <div [className]="'transactions__item-info'">
+          <h6 [className]="'transactions__item-title'">
+            {{ item.name }}
+          </h6>
+          <span [className]="'t12'"> {{ item.type }} </span>
+        </div>
+        <h6
+          [className]="'transactions__item-amount'"
+          [ngStyle]="{color: item.direction === 'in' ? '#55ACEE' : '#040325'}"
+        >
+          {{ item.direction === "in" ? "+" : "-" }}
+          {{ item.amount }}
+        </h6>
+      </li>
+    </ul>
+  </section>
+</main>
+
+<app-footer />
